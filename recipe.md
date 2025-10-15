@@ -246,7 +246,7 @@ birthday_reminder.calculate_age() # 7
 
 
 """
-(6A)
+(5A)
 Given name and birthday 
 #send_card marks card_status as "sent"
 """
