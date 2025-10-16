@@ -144,8 +144,6 @@ def test_if_upcoming_birthdays_returns_for_multiple_people():
     birthday_reminder.add("Mark", "04-11-1998")
     assert birthday_reminder.upcoming_birthdays() == "Maria, Mark"
 
-
-
 """
 (6A)
 Given name
@@ -169,3 +167,15 @@ def test_if_cards_marked_as_sent():
     with pytest.raises(Exception) as e:
         birthday_reminder.send_card("Sandra")
     assert str(e.value) == "Card already sent!"
+
+"""
+(6C)
+Given a name
+check card_status is "not sent"
+"""
+def test_card_not_sent():
+    birthday_reminder = BirthdayReminder()
+    birthday_reminder.add("Sandra", "30-06-2018")
+    birthday_reminder.add("Alex", "01-01-2018")
+    birthday_reminder.send_card("Sandra")
+    assert birthday_reminder.birthday_book["Alex"]["card_status"] == "not sent"
