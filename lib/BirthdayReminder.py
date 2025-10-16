@@ -10,7 +10,9 @@ class BirthdayReminder:
     def add(self, name, date):
         if name == "":
             raise Exception("Please enter valid name!")
-    
+        if date == "":
+            raise Exception("Please enter valid date!")
+        
         today = datetime.today()
         birthdate = datetime.strptime(date, "%d-%m-%Y")
 
@@ -27,24 +29,11 @@ class BirthdayReminder:
         }
 
     def update_date(self, name, date):
-        # Parameters:
-        #   name: string representing a name
-        #   date: string representing a date
-        # Returns:
-        #   Nothing
-        # Side-effects
-        #   Saves the new date to the corresponding name
-        pass  # No code here yet
+        self.birthday_book[name]["birthday"] = date
 
     def update_name(self, old_name, new_name):
-        # Parameters:
-        #   old_name: string representing the old name
-        #   new_name: string representing the new name
-        # Returns:
-        #   Nothing
-        # Side-effects
-        #   Update new name in entry
-        pass  # No code here yet
+        if old_name in self.birthday_book:
+            self.birthday_book[new_name] = self.birthday_book.pop(old_name)
 
     def upcoming_birthdays(self):
         # Parameters:
