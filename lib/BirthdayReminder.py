@@ -43,20 +43,13 @@ class BirthdayReminder:
         for blob in [today + relativedelta(days=i) for i in range(1, 30)]:
             upcoming_30_days.append(blob.strftime("%d-%m"))
 
-        # for i in self.birthday_book:
-        #     print(self.birthday_book[i]["birthday"][:5])
-
-
         for i in self.birthday_book:
             if self.birthday_book[i]["birthday"][:5] in upcoming_30_days:
                 upcoming_bdays.append(i)
-        return "".join(upcoming_bdays)
+        return ", ".join(upcoming_bdays)
 
     def send_card(self, name):
-        # Parameters:
-        #   name: a string representing a name
-        # Returns:
-        #   string: "You have sent a card to {name}"
-        # Side-effects
-        #   add done to to the entry
-        pass  # No code here yet
+        if self.birthday_book[name]["card_status"] == "sent":
+            raise Exception("Card already sent!")
+        else:
+            self.birthday_book[name]["card_status"] = "sent"

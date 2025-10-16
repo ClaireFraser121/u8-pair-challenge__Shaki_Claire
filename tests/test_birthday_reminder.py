@@ -132,35 +132,40 @@ def test_if_today_return_upcoming_birthdays():
     assert birthday_reminder.upcoming_birthdays() == "Maria"
 
 
-# """
-# (4B)
-# Given the current date
-# #upcoming_birthdays returns upcoming for multiple birthdays for the next month
-# """
-
-# birthday_reminder = BirthdayReminder()
-# birthday_reminder.add("Sandra", "30-06-2018")
-# birthday_reminder.add("Maria", "29-10-2000")
-# birthday_reminder.add("Mark", "04-11-1998")
-# birthday_reminder.upcoming_birthdays() # => {"Maria" : {"birthday": "29-10-2000", "age": 25, "card_status": "not sent"}, "Mark : {"birthday": "04-11-1998", "age": 26, "card_status": "not sent"}}
-
-# """
-# (5A)
-# Given a birthdate
-# #calculate_age returns age as an integer
-# """
-# birthday_reminder = BirthdayReminder()
-# birthday_reminder.add("Sandra", "30-06-2018")
-# birthday_reminder.calculate_age() # 7
-# #birthday_reminder.birthday_book # => {{"Sandra" : {"birthday": "30-06-2018", "age": 7, "card_status": "not sent"}}
+"""
+(4B)
+Given the current date
+#upcoming_birthdays returns upcoming for multiple birthdays for the next month
+"""
+def test_if_upcoming_birthdays_returns_for_multiple_people():
+    birthday_reminder = BirthdayReminder()
+    birthday_reminder.add("Sandra", "30-06-2018")
+    birthday_reminder.add("Maria", "29-10-2000")
+    birthday_reminder.add("Mark", "04-11-1998")
+    assert birthday_reminder.upcoming_birthdays() == "Maria, Mark"
 
 
-# """
-# (6A)
-# Given name and birthday
-# #send_card marks card_status as "sent"
-# """
-# birthday_reminder = BirthdayReminder()
-# birthday_reminder.add("Sandra", "30-06-2018")
-# birthday_reminder.send_card()
-# birthday_reminder.birthday_book # => {{"Sandra" : {"birthday": "30-06-2018", ""age"": 7, "card_status": "sent"}}
+
+"""
+(6A)
+Given name
+#send_card marks card_status as "sent"
+"""
+def test_if_cards_marked_as_sent():
+    birthday_reminder = BirthdayReminder()
+    birthday_reminder.add("Sandra", "30-06-2018")
+    birthday_reminder.send_card("Sandra")
+    assert birthday_reminder.birthday_book == {"Sandra" : {"birthday": "30-06-2018", "age": 7, "card_status": "sent"}}
+
+"""
+(6B)
+Given name for a card that has already been sent
+#send_card raises exception
+"""
+def test_if_cards_marked_as_sent():
+    birthday_reminder = BirthdayReminder()
+    birthday_reminder.add("Sandra", "30-06-2018")
+    birthday_reminder.send_card("Sandra")
+    with pytest.raises(Exception) as e:
+        birthday_reminder.send_card("Sandra")
+    assert str(e.value) == "Card already sent!"
