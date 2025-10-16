@@ -1,3 +1,4 @@
+import pytest
 from lib.BirthdayReminder import BirthdayReminder
 
 """
@@ -28,7 +29,6 @@ def test_name_and_birthday_are_stored():
         "Sandra": {"birthday": "30-06-2018", "age": 7, "card_status": "not sent"}
     }
 
-
 """
 (1B)
 Given multiple names and birthdays
@@ -48,13 +48,17 @@ def test_multiple_names_and_birthdays_store_correctly():
     }
 
 
-# """
-# (1C)
-# Given an empty name
-# It throws an exception
-# """
-# birthday_reminder = BirthdayReminder()
-# birthday_reminder.add("", "30-06-2018") # => "Please enter valid name!"
+"""
+(1C)
+Given an empty name
+It throws an exception
+"""
+def test_empty_name_raises_error():
+    birthday_reminder = BirthdayReminder()
+    with pytest.raises(Exception) as e:
+        birthday_reminder.add("", "30-06-2018")
+    error_message = str(e.value)
+    assert error_message == "Please enter valid name!"
 
 # """
 # (1D)

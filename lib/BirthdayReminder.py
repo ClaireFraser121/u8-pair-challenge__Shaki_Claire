@@ -1,6 +1,5 @@
 from datetime import datetime
 
-
 class BirthdayReminder:
     # User-facing properties:
     #   name: string
@@ -9,6 +8,9 @@ class BirthdayReminder:
         self.birthday_book = {}
 
     def add(self, name, date):
+        if name == "":
+            raise Exception("Please enter valid name!")
+    
         today = datetime.today()
         birthdate = datetime.strptime(date, "%d-%m-%Y")
 
@@ -23,31 +25,6 @@ class BirthdayReminder:
             "age": age,
             "card_status": "not sent",
         }
-
-    #     def calculateAge(birthDate):
-    #         today = date.today()
-    #         age = today.year - birthDate.year -
-    #         ((today.month, today.day) <
-    #         (birthDate.month, birthDate.day))
-
-    #         return age
-
-    # # Driver code
-    # print(calculateAge(date(1997, 2, 3)), "years")
-
-    # def calculate_age(self):
-    #     date = self.birthday_book[1][0]
-    #     birthday = datetime.strptime(date, "%Y-%m-%d")
-
-    #     self.today = datetime.today()  # this is a datetime object
-
-    #     # try:
-    #     #     d2 = datetime.strptime(date_of_birth, "%Y-%m-%d") #converts a string into a datetime object
-    #     # except ValueError:
-    #     #     return "Please enter a valid format"
-
-    #     # age = math.floor((datetime.today() - d2).days / 365)
-    #     return birthday
 
     def update_date(self, name, date):
         # Parameters:
