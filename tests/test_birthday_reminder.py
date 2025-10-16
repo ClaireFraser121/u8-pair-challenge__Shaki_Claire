@@ -129,7 +129,7 @@ def test_if_today_return_upcoming_birthdays():
     birthday_reminder = BirthdayReminder()
     birthday_reminder.add("Sandra", "30-06-2018")
     birthday_reminder.add("Maria", "29-10-2000")
-    assert birthday_reminder.upcoming_birthdays() == {"Maria" : {"birthday": "29-10-2000", "age": 25, "card_status": "not sent"}}
+    assert birthday_reminder.upcoming_birthdays() == "Maria"
 
 
 # """

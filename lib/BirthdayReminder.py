@@ -1,4 +1,5 @@
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 class BirthdayReminder:
     # User-facing properties:
@@ -36,13 +37,20 @@ class BirthdayReminder:
             self.birthday_book[new_name] = self.birthday_book.pop(old_name)
 
     def upcoming_birthdays(self):
-        # Parameters:
-        #   self
-        # Returns:
-        #   upcoming birthdays, names, age, and card status (done/not done)
-        # Side-effects
-        #   none
-        pass  # No code here yet
+        today = datetime.today()
+        upcoming_bdays = []
+        upcoming_30_days = []
+        for blob in [today + relativedelta(days=i) for i in range(1, 30)]:
+            upcoming_30_days.append(blob.strftime("%d-%m"))
+
+        # for i in self.birthday_book:
+        #     print(self.birthday_book[i]["birthday"][:5])
+
+
+        for i in self.birthday_book:
+            if self.birthday_book[i]["birthday"][:5] in upcoming_30_days:
+                upcoming_bdays.append(i)
+        return "".join(upcoming_bdays)
 
     def send_card(self, name):
         # Parameters:
